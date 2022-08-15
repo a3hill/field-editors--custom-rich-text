@@ -17,6 +17,7 @@ import { ToolbarBoldButton } from '../plugins/Marks/Bold';
 import { ToolbarCodeButton } from '../plugins/Marks/Code';
 import { ToolbarItalicButton } from '../plugins/Marks/Italic';
 import { ToolbarStrikeButton } from '../plugins/Marks/Strike';
+import { ToolbarSubscriptButton } from '../plugins/Marks/Subscript';
 import { ToolbarUnderlineButton } from '../plugins/Marks/Underline';
 import { ToolbarQuoteButton } from '../plugins/Quote';
 import { ToolbarTableButton } from '../plugins/Table';
@@ -83,6 +84,7 @@ const Toolbar = ({ isDisabled }: ToolbarProps) => {
           <ToolbarUnderlineButton isDisabled={isDisabled} />
         )}
         <ToolbarStrikeButton />
+        <ToolbarSubscriptButton />
         {isMarkEnabled(sdk.field, MARKS.CODE) && <ToolbarCodeButton isDisabled={isDisabled} />}
 
         {validationInfo.isAnyHyperlinkEnabled && (

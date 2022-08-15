@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Icon } from '@contentful/f36-components';
-// import { MARKS } from '@contentful/rich-text-types';
 import { createStrikethroughPlugin as createDefaultStrikePlugin } from '@udecode/plate-basic-marks';
 import { someHtmlElement } from '@udecode/plate-core';
 import { css } from 'emotion';

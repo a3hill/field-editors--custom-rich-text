@@ -8,7 +8,7 @@ import { focus } from '../../../helpers/editor';
 import { ToolbarButton } from '../../shared/ToolbarButton';
 
 export interface MarkOptions {
-  mark: MARKS;
+  mark: MARKS | string;
   title: string;
   icon: React.ReactElement;
 }

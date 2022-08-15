@@ -5,7 +5,7 @@ import isHotkey from 'is-hotkey';
 import { RichTextEditor } from '../../types';
 
 export const buildMarkEventHandler =
-  (type: MARKS): KeyboardHandler<RichTextEditor, HotkeyPlugin> =>
+  (type: MARKS | string): KeyboardHandler<RichTextEditor, HotkeyPlugin> =>
   (editor, { options: { hotkey } }) =>
   (event) => {
     if (editor.selection && hotkey && isHotkey(hotkey, event)) {

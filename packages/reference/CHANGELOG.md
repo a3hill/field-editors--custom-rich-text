@@ -3,6 +3,102 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.3](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.3.2...@contentful/field-editor-reference@5.3.3) (2022-10-11)
+
+### Bug Fixes
+
+- remove background override from xspace refs ([#1261](https://github.com/contentful/field-editors/issues/1261)) ([22004a9](https://github.com/contentful/field-editors/commit/22004a927b51bd7aebfc40449f11d48a3dcf9355))
+
+## [5.3.2](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.3.1...@contentful/field-editor-reference@5.3.2) (2022-10-06)
+
+### Bug Fixes
+
+- **deps:** deduplicate dependencies ([#1259](https://github.com/contentful/field-editors/issues/1259)) ([01cf780](https://github.com/contentful/field-editors/commit/01cf780b84943e23a1a1805da62d1319ee0a0424))
+
+## [5.3.1](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.3.0...@contentful/field-editor-reference@5.3.1) (2022-09-19)
+
+**Note:** Version bump only for package @contentful/field-editor-reference
+
+# [5.3.0](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.2.1...@contentful/field-editor-reference@5.3.0) (2022-09-16)
+
+### Features
+
+- use urn from entries that are fetched from api ([#1234](https://github.com/contentful/field-editors/issues/1234)) ([24e4ca2](https://github.com/contentful/field-editors/commit/24e4ca20fc18993f0eee1ee3886ff0b52ab2e8b8))
+
+## [5.2.1](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.2.0...@contentful/field-editor-reference@5.2.1) (2022-09-15)
+
+### Bug Fixes
+
+- increase pqueue concurrency in entitystore ([#1237](https://github.com/contentful/field-editors/issues/1237)) ([f81da79](https://github.com/contentful/field-editors/commit/f81da798ac61a2b609aefe3bc64450c3e942e6bf))
+
+# [5.2.0](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.8...@contentful/field-editor-reference@5.2.0) (2022-09-14)
+
+### Features
+
+- date editor with new f36 datepicker, do yarn deduplicate for f36-components [BAU-696] ([#1225](https://github.com/contentful/field-editors/issues/1225)) ([bc142a3](https://github.com/contentful/field-editors/commit/bc142a3522b7e55666eb3796f69f6cfcbab9a574))
+
+## [5.1.8](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.7...@contentful/field-editor-reference@5.1.8) (2022-09-12)
+
+### Bug Fixes
+
+- **reference-editor:** re-introduce entity refetch when slide-in is closed ([#1233](https://github.com/contentful/field-editors/issues/1233)) ([7026521](https://github.com/contentful/field-editors/commit/7026521d3c1885dbe61acd9dfc7a1e091a036565))
+
+## [5.1.7](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.6...@contentful/field-editor-reference@5.1.7) (2022-09-09)
+
+**Note:** Version bump only for package @contentful/field-editor-reference
+
+## [5.1.6](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.5...@contentful/field-editor-reference@5.1.6) (2022-09-07)
+
+### Bug Fixes
+
+- **reference-editor:** accept pubsub messages from alias and non-alias environments ([#1227](https://github.com/contentful/field-editors/issues/1227)) ([2d7d93a](https://github.com/contentful/field-editors/commit/2d7d93a2d3aa089f7ecdfec48c53c7839856ba0d))
+
+## [5.1.5](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.4...@contentful/field-editor-reference@5.1.5) (2022-09-06)
+
+**Note:** Version bump only for package @contentful/field-editor-reference
+
+## [5.1.4](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.3...@contentful/field-editor-reference@5.1.4) (2022-08-30)
+
+### Bug Fixes
+
+- **EntityStore:** use fixed cache key for scheduled actions [SPA-871] ([#1224](https://github.com/contentful/field-editors/issues/1224)) ([6b78132](https://github.com/contentful/field-editors/commit/6b78132d0c7643a88c2f15f8d14563355c65f30c))
+
+## [5.1.3](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.2...@contentful/field-editor-reference@5.1.3) (2022-08-26)
+
+### Bug Fixes
+
+- **EntityStore:** respect environment alias ([#1223](https://github.com/contentful/field-editors/issues/1223)) ([f66a6b9](https://github.com/contentful/field-editors/commit/f66a6b994f107341251a0ea335457a6b0148439f))
+
+## [5.1.2](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.1...@contentful/field-editor-reference@5.1.2) (2022-08-26)
+
+### Bug Fixes
+
+- change the props type definitions ([#1222](https://github.com/contentful/field-editors/issues/1222)) ([f71394b](https://github.com/contentful/field-editors/commit/f71394b3653c4e84bb45ed5745ba81eb0522e680))
+
+## [5.1.1](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.1.0...@contentful/field-editor-reference@5.1.1) (2022-08-25)
+
+### Bug Fixes
+
+- add p-queue as dependency ([#1220](https://github.com/contentful/field-editors/issues/1220)) ([8576389](https://github.com/contentful/field-editors/commit/85763896092414acce8e3e2f81f375dcf983b49f))
+
+# [5.1.0](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@5.0.0...@contentful/field-editor-reference@5.1.0) (2022-08-24)
+
+### Features
+
+- moving resource editors from web app [TOL-282] ([#1216](https://github.com/contentful/field-editors/issues/1216)) ([8e037d4](https://github.com/contentful/field-editors/commit/8e037d4f938aba8b9177de3e85a4a1d192ad3db5))
+
+# [5.0.0](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@4.6.10...@contentful/field-editor-reference@5.0.0) (2022-08-18)
+
+### Features
+
+- moving new entity store in [TOL-282] ([#1214](https://github.com/contentful/field-editors/issues/1214)) ([2ad4f64](https://github.com/contentful/field-editors/commit/2ad4f643296dbf48802410382a9a055de18a15de))
+
+### BREAKING CHANGES
+
+- useEntities is no longer export from the reference editor package. Use useEntity or useEntityLoader instead
+
+Co-authored-by: Ahmed T. Ali <ah.tajelsir@gmail.com>
+
 ## [4.6.10](https://github.com/contentful/field-editors/compare/@contentful/field-editor-reference@4.6.9...@contentful/field-editor-reference@4.6.10) (2022-08-09)
 
 ### Bug Fixes

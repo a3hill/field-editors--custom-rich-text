@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { json } from '@codemirror/lang-json';
+import { EditorView } from '@codemirror/view';
 import tokens from '@contentful/f36-tokens';
 import CodeMirror from '@uiw/react-codemirror';
 import { css, cx } from 'emotion';
@@ -22,12 +23,12 @@ const styles = {
     fontSize: tokens.fontSizeM,
     '.cm-editor': {
       color: tokens.gray900,
-      fontFamily: tokens.fontStackMonospace,
       '&.cm-focused': {
         outline: 'none',
       },
     },
     '.cm-scroller': {
+      fontFamily: tokens.fontStackMonospace,
       minHeight: '6rem',
     },
     '&.disabled': {
@@ -59,7 +60,7 @@ export function JsonEditorField(props: JsonEditorFieldProps) {
         value={props.value}
         onChange={props.onChange}
         theme="light"
-        extensions={[json()]}
+        extensions={[json(), EditorView.lineWrapping]}
         basicSetup={{
           closeBrackets: false,
           lineNumbers: false,
@@ -67,6 +68,7 @@ export function JsonEditorField(props: JsonEditorFieldProps) {
           highlightActiveLine: false,
           foldGutter: false,
           bracketMatching: false,
+          syntaxHighlighting: false,
         }}
         width="100%"
         editable={!props.isDisabled}

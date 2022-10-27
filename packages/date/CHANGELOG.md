@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/contentful/field-editors/compare/@contentful/field-editor-date@1.2.3...@contentful/field-editor-date@1.2.4) (2022-09-22)
+
+**Note:** Version bump only for package @contentful/field-editor-date
+
+## [1.2.3](https://github.com/contentful/field-editors/compare/@contentful/field-editor-date@1.2.2...@contentful/field-editor-date@1.2.3) (2022-09-21)
+
+### Bug Fixes
+
+- **field-editor-date:** fix date formatting [] ([#1255](https://github.com/contentful/field-editors/issues/1255)) ([bd38088](https://github.com/contentful/field-editors/commit/bd38088fcaa0c4e6916f55a8aec030659b0a88cd))
+
+## [1.2.2](https://github.com/contentful/field-editors/compare/@contentful/field-editor-date@1.2.1...@contentful/field-editor-date@1.2.2) (2022-09-16)
+
+### Bug Fixes
+
+- fix the way date is parsed in the DateEditor [BAU-943] ([#1239](https://github.com/contentful/field-editors/issues/1239)) ([97434e7](https://github.com/contentful/field-editors/commit/97434e7cbd223fa9347e513ccb9571f210b88344))
+
+## [1.2.1](https://github.com/contentful/field-editors/compare/@contentful/field-editor-date@1.2.0...@contentful/field-editor-date@1.2.1) (2022-09-15)
+
+### Bug Fixes
+
+- fix date-editor import ([#1238](https://github.com/contentful/field-editors/issues/1238)) ([d70fe58](https://github.com/contentful/field-editors/commit/d70fe58ed0d54321dea300cf5c33ace791cb7c4f))
+
+# [1.2.0](https://github.com/contentful/field-editors/compare/@contentful/field-editor-date@1.1.10...@contentful/field-editor-date@1.2.0) (2022-09-14)
+
+### Bug Fixes
+
+- cleanup console log ([#1235](https://github.com/contentful/field-editors/issues/1235)) ([823b09f](https://github.com/contentful/field-editors/commit/823b09f77c2576cf0e8ae33b8bec4dc9abb51999))
+
+### Features
+
+- date editor with new f36 datepicker, do yarn deduplicate for f36-components [BAU-696] ([#1225](https://github.com/contentful/field-editors/issues/1225)) ([bc142a3](https://github.com/contentful/field-editors/commit/bc142a3522b7e55666eb3796f69f6cfcbab9a574))
+
 ## [1.1.10](https://github.com/contentful/field-editors/compare/@contentful/field-editor-date@1.1.9...@contentful/field-editor-date@1.1.10) (2022-07-29)
 
 **Note:** Version bump only for package @contentful/field-editor-date

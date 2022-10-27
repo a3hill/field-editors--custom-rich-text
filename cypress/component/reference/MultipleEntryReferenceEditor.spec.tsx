@@ -1,12 +1,18 @@
 import React from 'react';
 
-import { Card, Note, Heading, Paragraph, Button } from '@contentful/f36-components';
+import { NavigatorSlideInfo } from '@contentful/app-sdk';
+import { Button, Card, Heading, Note, Paragraph } from '@contentful/f36-components';
 import { Entry } from '@contentful/field-editor-shared';
+import { cloneDeep, set } from 'lodash-es';
 
 import { CombinedLinkActions, MultipleEntryReferenceEditor } from '../../../packages/reference/src';
 import { Entity, Link } from '../../../packages/reference/src/types';
+import {
+  createReferenceEditorTestSdk,
+  fixtures,
+  ReferenceEditorFakeSdkProps,
+} from '../../fixtures';
 import { mount } from '../mount';
-import { createReferenceEditorTestSdk, fixtures } from '../test-sdks';
 
 const commonProps = {
   isInitiallyDisabled: false,
@@ -22,6 +28,15 @@ const commonProps = {
 
 function asLink<E extends Entity>(entity: E): Link {
   return { sys: { type: 'Link', linkType: entity.sys.type, id: entity.sys.id } };
+}
+
+function modifyEntry(entry: Entry, modifier: Record<string, unknown>): Entry {
+  const modified = Object.entries(modifier).reduce(
+    (entry, [path, value]) => set(entry, path, value),
+    cloneDeep(entry)
+  );
+
+  return modified;
 }
 
 describe('Multiple Reference Editor', () => {
@@ -140,9 +155,9 @@ describe('Multiple Reference Editor', () => {
   it(`shows status of entries`, () => {
     const sdk = createReferenceEditorTestSdk({
       initialValue: [
-        asLink(fixtures.entry.empty),
-        asLink(fixtures.entry.changed),
-        asLink(fixtures.entry.published),
+        asLink(fixtures.entries.empty),
+        asLink(fixtures.entries.changed),
+        asLink(fixtures.entries.published),
       ],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />);
@@ -156,7 +171,7 @@ describe('Multiple Reference Editor', () => {
   //TODO: Do we also want to test that the props are correct, or should that be done in a jest test?
   it(`provides the custom card render method with necessary properties`, () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     mount(
       <MultipleEntryReferenceEditor
@@ -173,7 +188,7 @@ describe('Multiple Reference Editor', () => {
 
   it('shows localized displayField as title using the current locale', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     sdk.field.locale = 'de-DE';
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />);
@@ -186,7 +201,7 @@ describe('Multiple Reference Editor', () => {
 
   it('shows unlocalized displayField as title using the default locale', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />);
 
@@ -195,7 +210,7 @@ describe('Multiple Reference Editor', () => {
 
   it('shows missing entry card for failed requests', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.invalid)],
+      initialValue: [asLink(fixtures.entries.invalid)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />);
 
@@ -205,7 +220,7 @@ describe('Multiple Reference Editor', () => {
   it('shows loading state while fetching entry', () => {
     const sdk = createReferenceEditorTestSdk({
       fetchDelay: 2000,
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />);
 
@@ -214,7 +229,7 @@ describe('Multiple Reference Editor', () => {
 
   it('custom action props reach render method', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     mount(
       <MultipleEntryReferenceEditor
@@ -231,7 +246,7 @@ describe('Multiple Reference Editor', () => {
 
   it('custom missing entity card props reach render method', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.invalid)],
+      initialValue: [asLink(fixtures.entries.invalid)],
     });
     mount(
       <MultipleEntryReferenceEditor
@@ -248,7 +263,7 @@ describe('Multiple Reference Editor', () => {
 
   it('opens entry when clicking on it', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />).as('editor');
 
@@ -261,7 +276,7 @@ describe('Multiple Reference Editor', () => {
 
   it('opens entry via actions menu', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />).as('editor');
 
@@ -275,7 +290,7 @@ describe('Multiple Reference Editor', () => {
 
   it('changes order via actions menu', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published), asLink(fixtures.entry.changed)],
+      initialValue: [asLink(fixtures.entries.published), asLink(fixtures.entries.changed)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />).as('editor');
 
@@ -285,13 +300,14 @@ describe('Multiple Reference Editor', () => {
 
     cy.get('@firstCard').findByTestId('cf-ui-card-actions').click();
     cy.findByTestId('move-bottom').click();
+    cy.wait(500);
 
     findDefaultCards().eq(1).findByTestId('title').should('have.text', 'The best article ever');
   });
 
   it('removes items via actions menu', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published), asLink(fixtures.entry.changed)],
+      initialValue: [asLink(fixtures.entries.published), asLink(fixtures.entries.changed)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} sdk={sdk} />);
 
@@ -301,6 +317,7 @@ describe('Multiple Reference Editor', () => {
 
     cy.get('@firstCard').findByTestId('cf-ui-card-actions').click();
     cy.findByTestId('delete').click();
+    cy.wait(500);
 
     findDefaultCards().eq(0).findByTestId('title').should('have.text', `Weather doesn't look good`);
   });
@@ -308,7 +325,7 @@ describe('Multiple Reference Editor', () => {
   //TODO: Currently fails
   // it('shows disabled links as disabled', () => {
   //   const sdk = createReferenceEditorTestSdk({
-  //     initialValue: [asLink(fixtures.entry.published)],
+  //     initialValue: [asLink(fixtures.entries.published)],
   //   });
   //   mount(<MultipleEntryReferenceEditor {...commonProps} isInitiallyDisabled={true} sdk={sdk} />);
 
@@ -320,7 +337,7 @@ describe('Multiple Reference Editor', () => {
 
   it('shows disabled links as non-draggable', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published)],
+      initialValue: [asLink(fixtures.entries.published)],
     });
     mount(<MultipleEntryReferenceEditor {...commonProps} isInitiallyDisabled={true} sdk={sdk} />);
 
@@ -329,7 +346,7 @@ describe('Multiple Reference Editor', () => {
 
   it('can hide edit action', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published), asLink(fixtures.entry.changed)],
+      initialValue: [asLink(fixtures.entries.published), asLink(fixtures.entries.changed)],
     });
 
     mount(
@@ -347,7 +364,7 @@ describe('Multiple Reference Editor', () => {
 
   it('can hide remove action', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published), asLink(fixtures.entry.changed)],
+      initialValue: [asLink(fixtures.entries.published), asLink(fixtures.entries.changed)],
     });
 
     mount(
@@ -365,7 +382,7 @@ describe('Multiple Reference Editor', () => {
 
   it('can hide move action', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published), asLink(fixtures.entry.changed)],
+      initialValue: [asLink(fixtures.entries.published), asLink(fixtures.entries.changed)],
     });
 
     mount(
@@ -383,7 +400,7 @@ describe('Multiple Reference Editor', () => {
 
   it('hides action menu when no actions are available', () => {
     const sdk = createReferenceEditorTestSdk({
-      initialValue: [asLink(fixtures.entry.published), asLink(fixtures.entry.changed)],
+      initialValue: [asLink(fixtures.entries.published), asLink(fixtures.entries.changed)],
     });
 
     mount(
@@ -400,12 +417,119 @@ describe('Multiple Reference Editor', () => {
     findDefaultCards().eq(0).findByTestId('cf-ui-card-actions').should('not.exist');
   });
 
-  // prio ?
-  // ------
-  // shows asset in tile view
-  // changing order by drag&drop
-  // shows predefined labels
-  // shows custom labels
-  // can render as list
-  // can render as tiles
+  describe(`behaviour on external changes`, () => {
+    function updateEntry(entry: Entry, title: string) {
+      cy.getComponentFixtures().then(({ pubsub }) => {
+        const updatedEntry = modifyEntry(entry, {
+          'sys.version': entry.sys.version + 2,
+          'fields.exField.en-US': title,
+        });
+        pubsub.entityChanged('Entry', updatedEntry.sys.id, updatedEntry);
+      });
+    }
+
+    function localMount(entry: Entry, props?: ReferenceEditorFakeSdkProps) {
+      const sdk = createReferenceEditorTestSdk({
+        initialValue: [asLink(entry)],
+        ...props,
+      });
+      mount(
+        <MultipleEntryReferenceEditor
+          {...commonProps}
+          hasCardEditActions={false}
+          hasCardMoveActions={false}
+          hasCardRemoveActions={false}
+          isInitiallyDisabled={false}
+          sdk={sdk}
+        />
+      );
+    }
+
+    it(`updates cards in un-aliased environment`, () => {
+      localMount(fixtures.entries.published);
+
+      const initialTitle = fixtures.entries.published.fields.exField['en-US'];
+      const updatedTitle = initialTitle + ' [updated]';
+
+      cy.findByText(initialTitle);
+      updateEntry(fixtures.entries.published, updatedTitle);
+      cy.findByText(updatedTitle);
+    });
+
+    it(`updates cards in aliased environment`, () => {
+      localMount(fixtures.entries.published, {
+        ids: {
+          environment: 'master-2511',
+          environmentAlias: 'master',
+          space: 'space-id',
+        },
+      });
+
+      const initialTitle = fixtures.entries.published.fields.exField['en-US'];
+      const updatedTitle = initialTitle + ' [updated]';
+
+      cy.findByText(initialTitle);
+      updateEntry(fixtures.entries.published, updatedTitle);
+      cy.findByText(updatedTitle);
+    });
+  });
+
+  describe(`behaviour on slideInNavigation`, () => {
+    function updateAndSlideIn(entry: Entry, title: string, slide: NavigatorSlideInfo) {
+      cy.getComponentFixtures().then(({ store, navigator }) => {
+        const updatedEntry = modifyEntry(entry, {
+          'sys.version': entry.sys.version + 2,
+          'fields.exField.en-US': title,
+        });
+        store.set('Entry', updatedEntry.sys.id, updatedEntry);
+        navigator.slideIn(slide);
+      });
+    }
+
+    function localMount(entry: Entry) {
+      const sdk = createReferenceEditorTestSdk({
+        initialValue: [asLink(entry)],
+        modifier: (sdk) => {
+          // @ts-expect-error ...
+          sdk.space.onEntityChanged = undefined;
+          return sdk;
+        },
+      });
+      mount(
+        <MultipleEntryReferenceEditor
+          {...commonProps}
+          hasCardEditActions={false}
+          hasCardMoveActions={false}
+          hasCardRemoveActions={false}
+          isInitiallyDisabled={false}
+          sdk={sdk}
+        />
+      );
+    }
+
+    it(`updates cards if slide is closed`, () => {
+      const entry = fixtures.entries.published;
+      const initialTitle = entry.fields.exField['en-US'];
+      const updatedTitle = initialTitle + ' [updated]';
+
+      localMount(entry);
+
+      cy.findByText(initialTitle);
+      updateAndSlideIn(entry, updatedTitle, { oldSlideLevel: 2, newSlideLevel: 1 });
+      cy.findByText(updatedTitle);
+    });
+
+    it(`does not update cards if slide is opened`, () => {
+      const entry = fixtures.entries.published;
+      const initialTitle = entry.fields.exField['en-US'];
+      const updatedTitle = initialTitle + ' [updated]';
+
+      localMount(entry);
+
+      cy.findByText(initialTitle);
+      updateAndSlideIn(entry, updatedTitle, { oldSlideLevel: 1, newSlideLevel: 2 });
+      cy.findByText(updatedTitle).should('not.exist');
+      cy.findByText(initialTitle).should('exist');
+    });
+  });
 });

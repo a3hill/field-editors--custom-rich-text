@@ -4,7 +4,10 @@ describe('Date Editor', () => {
 
   const selectors = {
     getDateInput: () => {
-      return cy.findByTestId('date-input');
+      return cy.findByTestId('cf-ui-datepicker-input');
+    },
+    getCalendarTrigger: () => {
+      return cy.findByTestId('cf-ui-datepicker-button');
     },
     getTimeInput: () => {
       return cy.findByTestId('time-input');
@@ -16,19 +19,19 @@ describe('Date Editor', () => {
       return cy.findByTestId('date-clear');
     },
     getCalendar: () => {
-      return cy.get('.pika-lendar');
+      return cy.get('.rdp');
     },
     getCalendarMonth: () => {
-      return cy.get('.pika-lendar .pika-select-month');
+      return cy.get('.rdp select[aria-label="Month: "]');
     },
     getCalendarYear: () => {
-      return cy.get('.pika-lendar .pika-select-year');
+      return cy.get('.rdp select[aria-label="Year: "]');
     },
     getCalendarTodayDate: () => {
-      return cy.get('.pika-lendar .is-today');
+      return cy.get('.rdp .rdp-day_today');
     },
     getCalendarSelectedDate: () => {
-      return cy.get('.pika-lendar .is-selected');
+      return cy.get('.rdp .rdp-day_selected');
     },
   };
 
@@ -69,7 +72,7 @@ describe('Date Editor', () => {
       cy.setInitialValue('2018-01-03T05:53+03:00');
       openPage();
 
-      selectors.getDateInput().should('have.value', 'Wednesday, January 3rd 2018');
+      selectors.getDateInput().should('have.value', '03 Jan 2018');
       selectors.getTimeInput().should('have.value', '05:53');
       selectors.getTimezoneInput().should('have.value', '+03:00');
     });
@@ -91,7 +94,7 @@ describe('Date Editor', () => {
       openPage();
       const { year, month, date } = getToday();
 
-      selectors.getDateInput().click();
+      selectors.getCalendarTrigger().click();
 
       selectors.getCalendar().should('be.visible');
       selectors.getCalendarYear().should('have.value', year.toString());
@@ -104,9 +107,9 @@ describe('Date Editor', () => {
       openPage();
       selectors.getTimezoneInput().select('+08:00').blur().should('have.value', '+08:00');
 
-      selectors.getDateInput().click();
+      selectors.getCalendarTrigger().click();
       selectors.getCalendarTodayDate().click();
-      selectors.getDateInput().blur().should('have.value', 'Friday, February 15th 2019');
+      selectors.getDateInput().should('have.value', '15 Feb 2019');
 
       selectors.getTimeInput().focus().type('15:00').blur().should('have.value', '15:00');
 
@@ -135,7 +138,7 @@ describe('Date Editor', () => {
 
       openPage();
 
-      selectors.getDateInput().should('have.value', 'Wednesday, January 3rd 1990');
+      selectors.getDateInput().should('have.value', '03 Jan 1990');
       selectors.getTimeInput().should('have.value', '22:53');
       selectors.getTimezoneInput().should('have.value', '+03:00');
 
@@ -143,7 +146,7 @@ describe('Date Editor', () => {
 
       cy.wait(500);
 
-      selectors.getDateInput().should('have.value', 'Friday, January 3rd 1992');
+      selectors.getDateInput().should('have.value', '03 Jan 1992');
       selectors.getTimeInput().should('have.value', '21:40');
       selectors.getTimezoneInput().should('have.value', '+05:00');
     });
@@ -165,6 +168,38 @@ describe('Date Editor', () => {
         selectors.getTimeInput().type(pair[0]).blur().should('have.value', pair[1]);
       });
     });
+
+    it('should show the correct date regardless of the time and timezone #1', () => {
+      cy.setInitialValue('2022-11-01T00:00+02:00');
+      openPage();
+
+      selectors.getDateInput().should('have.value', '01 Nov 2022');
+      selectors.getTimeInput().should('have.value', '00:00');
+      selectors.getTimezoneInput().should('have.value', '+02:00');
+
+      selectors.getCalendarTrigger().click();
+
+      selectors.getCalendar().should('be.visible');
+      selectors.getCalendarYear().should('have.value', '2022');
+      selectors.getCalendarMonth().should('have.value', '10');
+      selectors.getCalendarSelectedDate().should('have.text', '1');
+    });
+
+    it('should show the correct date regardless of the time and timezone #2', () => {
+      cy.setInitialValue('2022-11-01T00:00+12:00');
+      openPage();
+
+      selectors.getDateInput().should('have.value', '01 Nov 2022');
+      selectors.getTimeInput().should('have.value', '00:00');
+      selectors.getTimezoneInput().should('have.value', '+12:00');
+
+      selectors.getCalendarTrigger().click();
+
+      selectors.getCalendar().should('be.visible');
+      selectors.getCalendarYear().should('have.value', '2022');
+      selectors.getCalendarMonth().should('have.value', '10');
+      selectors.getCalendarSelectedDate().should('have.text', '1');
+    });
   });
 
   describe('without timezone and with AM/PM', () => {
@@ -179,11 +214,11 @@ describe('Date Editor', () => {
       cy.setInitialValue('1990-01-03T22:53+03:00');
       openPage();
 
-      selectors.getDateInput().should('have.value', 'Wednesday, January 3rd 1990');
+      selectors.getDateInput().should('have.value', '03 Jan 1990');
       selectors.getTimeInput().should('have.value', '10:53 PM');
       selectors.getTimezoneInput().should('not.exist');
 
-      selectors.getDateInput().click();
+      selectors.getCalendarTrigger().click();
 
       selectors.getCalendar().should('be.visible');
       selectors.getCalendarYear().should('have.value', '1990');
@@ -212,9 +247,9 @@ describe('Date Editor', () => {
     it('correct actions are called when user interacts with editor', () => {
       openPage();
 
-      selectors.getDateInput().click();
+      selectors.getCalendarTrigger().click();
       selectors.getCalendarTodayDate().click();
-      selectors.getDateInput().blur().should('have.value', 'Friday, February 15th 2019');
+      selectors.getDateInput().should('have.value', '15 Feb 2019');
 
       selectors.getTimeInput().focus().type('3:00 PM').blur().should('have.value', '03:00 PM');
 
@@ -242,14 +277,14 @@ describe('Date Editor', () => {
 
       openPage();
 
-      selectors.getDateInput().should('have.value', 'Wednesday, January 3rd 1990');
+      selectors.getDateInput().should('have.value', '03 Jan 1990');
       selectors.getTimeInput().should('have.value', '10:53 PM');
 
       cy.setValueExternal('1992-01-03T21:40');
 
       cy.wait(500);
 
-      selectors.getDateInput().should('have.value', 'Friday, January 3rd 1992');
+      selectors.getDateInput().should('have.value', '03 Jan 1992');
       selectors.getTimeInput().should('have.value', '09:40 PM');
     });
   });
@@ -265,11 +300,11 @@ describe('Date Editor', () => {
       cy.setInitialValue('1990-01-03T22:53');
       openPage();
 
-      selectors.getDateInput().should('have.value', 'Wednesday, January 3rd 1990');
+      selectors.getDateInput().should('have.value', '03 Jan 1990');
       selectors.getTimeInput().should('not.exist');
       selectors.getTimezoneInput().should('not.exist');
 
-      selectors.getDateInput().click();
+      selectors.getCalendarTrigger().click();
 
       selectors.getCalendar().should('be.visible');
       selectors.getCalendarYear().should('have.value', '1990');
@@ -280,9 +315,9 @@ describe('Date Editor', () => {
     it('correct actions are called when user interacts with editor', () => {
       openPage();
 
-      selectors.getDateInput().click();
+      selectors.getCalendarTrigger().click();
       selectors.getCalendarTodayDate().click();
-      selectors.getDateInput().blur().should('have.value', 'Friday, February 15th 2019');
+      selectors.getDateInput().should('have.value', '15 Feb 2019');
 
       selectors.getClearBtn().click();
 
@@ -305,11 +340,11 @@ describe('Date Editor', () => {
 
       openPage();
 
-      selectors.getDateInput().should('have.value', 'Wednesday, January 3rd 1990');
+      selectors.getDateInput().should('have.value', '03 Jan 1990');
 
       cy.setValueExternal('1992-01-03');
 
-      selectors.getDateInput().should('have.value', 'Friday, January 3rd 1992');
+      selectors.getDateInput().should('have.value', '03 Jan 1992');
     });
   });
 });

@@ -1781,6 +1781,7 @@ describe('Rich Text Editor', { viewportHeight: 2000 }, () => {
       // Necessary for reading the correct LocalStorage values as we do
       // the initial page load on the beforeEach hook
       cy.reload();
+      richText.expectValue(documentWithLinks);
       cy.editorActions().should(
         'deep.equal',
         new Array(5).fill([

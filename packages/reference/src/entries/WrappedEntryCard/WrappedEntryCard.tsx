@@ -112,7 +112,6 @@ export function WrappedEntryCard(props: WrappedEntryCardProps) {
       size={props.size}
       isSelected={props.isSelected}
       status={status}
-      style={props.spaceName ? { backgroundColor: tokens.gray100 } : undefined}
       icon={
         props.spaceName ? (
           <SpaceName spaceName={props.spaceName} />
@@ -157,15 +156,19 @@ export function WrappedEntryCard(props: WrappedEntryCardProps) {
                 </MenuItem>
               ) : null,
               props.hasCardMoveActions && (props.onMoveTop || props.onMoveBottom) ? (
-                <MenuDivider />
+                <MenuDivider key="divider" />
               ) : null,
               props.hasCardMoveActions && props.onMoveTop ? (
-                <MenuItem onClick={() => props.onMoveTop && props.onMoveTop()} testId="move-top">
+                <MenuItem
+                  key="move-top"
+                  onClick={() => props.onMoveTop && props.onMoveTop()}
+                  testId="move-top">
                   Move to top
                 </MenuItem>
               ) : null,
               props.hasCardMoveActions && props.onMoveBottom ? (
                 <MenuItem
+                  key="move-bottom"
                   onClick={() => props.onMoveBottom && props.onMoveBottom()}
                   testId="move-bottom">
                   Move to bottom

@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.8](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.7...@contentful/field-editor-rich-text@3.1.8) (2022-10-12)
+
+### Bug Fixes
+
+- [] Check content for undefined ([#1215](https://github.com/contentful/field-editors/issues/1215)) ([1ff49f4](https://github.com/contentful/field-editors/commit/1ff49f40cd563e1a78a56e049edbf77d59156a33))
+
+## [3.1.7](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.6...@contentful/field-editor-rich-text@3.1.7) (2022-10-11)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.1.6](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.5...@contentful/field-editor-rich-text@3.1.6) (2022-10-06)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.1.5](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.4...@contentful/field-editor-rich-text@3.1.5) (2022-09-30)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.1.4](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.3...@contentful/field-editor-rich-text@3.1.4) (2022-09-21)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.1.3](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.2...@contentful/field-editor-rich-text@3.1.3) (2022-09-19)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.1.2](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.1...@contentful/field-editor-rich-text@3.1.2) (2022-09-16)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.1.1](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.1.0...@contentful/field-editor-rich-text@3.1.1) (2022-09-15)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+# [3.1.0](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.9...@contentful/field-editor-rich-text@3.1.0) (2022-09-14)
+
+### Features
+
+- date editor with new f36 datepicker, do yarn deduplicate for f36-components [BAU-696] ([#1225](https://github.com/contentful/field-editors/issues/1225)) ([bc142a3](https://github.com/contentful/field-editors/commit/bc142a3522b7e55666eb3796f69f6cfcbab9a574))
+
+## [3.0.9](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.8...@contentful/field-editor-rich-text@3.0.9) (2022-09-12)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.8](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.7...@contentful/field-editor-rich-text@3.0.8) (2022-09-09)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.7](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.6...@contentful/field-editor-rich-text@3.0.7) (2022-09-07)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.6](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.5...@contentful/field-editor-rich-text@3.0.6) (2022-09-06)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.5](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.4...@contentful/field-editor-rich-text@3.0.5) (2022-08-30)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.4](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.3...@contentful/field-editor-rich-text@3.0.4) (2022-08-26)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.3](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.2...@contentful/field-editor-rich-text@3.0.3) (2022-08-26)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.2](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.1...@contentful/field-editor-rich-text@3.0.2) (2022-08-25)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+## [3.0.1](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@3.0.0...@contentful/field-editor-rich-text@3.0.1) (2022-08-24)
+
+**Note:** Version bump only for package @contentful/field-editor-rich-text
+
+# [3.0.0](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@2.3.20...@contentful/field-editor-rich-text@3.0.0) (2022-08-18)
+
+### Features
+
+- moving new entity store in [TOL-282] ([#1214](https://github.com/contentful/field-editors/issues/1214)) ([2ad4f64](https://github.com/contentful/field-editors/commit/2ad4f643296dbf48802410382a9a055de18a15de))
+
+### BREAKING CHANGES
+
+- useEntities is no longer export from the reference editor package. Use useEntity or useEntityLoader instead
+
+Co-authored-by: Ahmed T. Ali <ah.tajelsir@gmail.com>
+
 ## [2.3.20](https://github.com/contentful/field-editors/compare/@contentful/field-editor-rich-text@2.3.19...@contentful/field-editor-rich-text@2.3.20) (2022-08-10)
 
 ### Bug Fixes
